@@ -2,10 +2,10 @@
     --text-opacity: 1;
     --bg-opacity: 1;
 
-    --primary-color: 242, 159, 88;
-    --secondary-color: 171, 68, 89;
-    --tertiary-color: 68, 23, 82;
-    --quaternary-color: 27, 24, 51;
+    --primary-color: 54, 116, 181;
+    --secondary-color: 87, 143, 202;
+    --tertiary-color: 161, 227, 249;
+    --quaternary-color: 209, 248, 239;
 }
 
 * {
@@ -52,7 +52,7 @@ header{
 main{
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 12px;
     align-items: center;
     justify-content: center;
     padding: 24px;
@@ -61,14 +61,16 @@ main{
 hr{
     border: none;
     height: 2px;
-    width: 50%;
+    width: 100%;
     background-color: rgba(var(--secondary-color), 0.2);
-    margin: 16px 1px;
-    border-radius: 24px;
+}
+
+main > hr {
+    width: 35%;
 }
 
 .location-name{
-    font-size: xxx-large;
+    font-size: xx-large;
 }
 
 .temp-container{
@@ -78,7 +80,7 @@ hr{
 }
 
 .current-temp{
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .feels-like {
@@ -92,7 +94,12 @@ hr{
     font-size: large;
 }
 
-object[type="image/svg+xml"] {
+.weather-icon{
+    max-width: 12rem;
+    margin-bottom: 16px;
+}
+
+object[type="image/svg+xml"], img {
     filter: invert(100%);
     max-width: 100%;
     max-height: 100%;
@@ -114,6 +121,7 @@ object[type="image/svg+xml"] {
 
 .large{
     min-width: 32px;
+    min-height: 32px;
 }
 
 @keyframes fadeIn {
