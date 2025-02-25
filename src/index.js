@@ -1,8 +1,8 @@
 import "./css-reset.css";
 import "./template.css";
 
-import searchIcon from "./media/search.svg";
 import temperatureIcon from "./media/thermometer-half.svg";
+// import all svgs into one object for all weathers inside of media/4th-monochrome from visual crossing
 
 import {apiKey} from "./apiKey.js";
 
@@ -29,17 +29,19 @@ const getWeatherData = async (location) => {
         }
         const weatherData = await response.json();
         console.log("weatherData:",weatherData);
-        return { 
-            temp : weatherData.currentConditions.temp, 
+        return {
+            locationName : weatherData.resolvedAddress,
+            temp : weatherData.currentConditions.temp,
             description : weatherData.description,
             feelslike : weatherData.currentConditions.feelslike
         };
     } catch (error) {
         console.log(error);
         return {
-            temp : "N/A",
-            description : "N/A",
-            feelslike : "N/A"
+            locationName : "No Location Found",
+            temp : "",
+            description : "",
+            feelslike : ""  
         };
     }
 }
@@ -53,12 +55,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const locationElement = document.querySelector("input#location");
     if (locationElement){
         let curTimeout;
-        locationElement.addEventListener("change", ()=>{
+        locationElement.addEventListener("input", ()=>{ 
             // update weather info based upon that location
             curTimeout && clearTimeout(curTimeout);
             if (!locationElement.value) {return};
             curTimeout = setTimeout(async ()=>{
-                const {temp, description, feelslike} = await getWeatherData(locationElement.value);
+                const {locationName, temp, description, feelslike, iconName} = await getWeatherData(locationElement.value);
+
+                document.querySelector(".location-name").textContent = locationName;
 
                 const stringTemp = formTempString(temp);
                 console.log("stringTemp:", stringTemp);
@@ -67,7 +71,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 document.querySelector(".description").textContent = description;
 
                 document.querySelector(".feels-like").textContent = "Feels like: " + formTempString(feelslike);
-            }, 100);
+
+                //set src
+                //document.querySelector(".weather-icon").src = "";
+            }, 600);a
         });
     }
     
@@ -91,7 +98,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
             console.log("unitGroup:",unitGroup);
 
-            locationElement.dispatchEvent(new Event("change"));
+            locationElement.dispatchEvent(new Event("input"));
 
             toggleTempTypeButton.classList.add("fade");
             setTimeout(()=>{
@@ -100,6 +107,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
     }
 
+    const weatherIconElement = document.querySelector(".weather-icon");
+    weatherIconElement && addObjectToElement(weatherIconElement, createObjectFromSVG(weatherIcon));
     // const searchButton = document.querySelector("button#search");
     // if (searchButton){
     //     addObjectToElement(searchButton, createObjectFromSVG(searchIcon));
