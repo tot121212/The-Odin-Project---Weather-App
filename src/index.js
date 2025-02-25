@@ -22,14 +22,26 @@ const addObjectToElement = (element, object)=>{
 const degreeSymbol = "°";
 let unitGroup = "us";
 const getWeatherData = async (location) => {
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${apiKey}&unitGroup=${unitGroup}`);
-    const weatherData = await response.json();
-    console.log("weatherData:",weatherData);
-    return { 
-        temp : weatherData.currentConditions.temp, 
-        description : weatherData.description,
-        feelslike : weatherData.currentConditions.feelslike
-    };
+    try {
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${apiKey}&unitGroup=${unitGroup}`);
+        if (!response.ok){
+            throw new Error("Error fetching weather data");
+        }
+        const weatherData = await response.json();
+        console.log("weatherData:",weatherData);
+        return { 
+            temp : weatherData.currentConditions.temp, 
+            description : weatherData.description,
+            feelslike : weatherData.currentConditions.feelslike
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            temp : "N/A",
+            description : "N/A",
+            feelslike : "N/A"
+        };
+    }
 }
 
 const formTempString = (temp) => {
