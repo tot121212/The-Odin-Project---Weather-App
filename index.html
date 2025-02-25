@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+<script defer src="main.js"></script></head>
+<body class="dark">
+    <header>
+        <input type="text" id="location" class="dark shadow" placeholder="City, Country">
+        <button type="button" id="toggle-temp-type" class="grabbable logo large fahrenheit"></button>
+    </header>
+    <!--
+    <button type="button" id="search" class="large"></button>
+    -->
+    <main class="shadow">
+        <div class="location-name">City, Country</div>
+        <div class="temp-container">
+            <div class="current-temp">75°F</div>
+            <div class="feels-like">Feels like: 72°F</div>
+        </div>
+        <hr>
+        <img class="weather-icon logo large" alt="" hidden>
+        <div class="description" hidden></div>
+    </main> 
+</body>
+</html>
