@@ -136,11 +136,4 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }, 300);
         });
     }
-    // const searchButton = document.querySelector("button#search");
-    // if (searchButton){
-    //     addObjectToElement(searchButton, createObjectFromSVG(searchIcon));
-    //     searchButton.addEventListener("click", ()=>{
-    //         // search
-    //     });
-    // }
 });
