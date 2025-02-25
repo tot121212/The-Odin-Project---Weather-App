@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
                 //set src
                 //document.querySelector(".weather-icon").src = "";
-            }, 600);a
+            }, 600);
         });
     }
     
